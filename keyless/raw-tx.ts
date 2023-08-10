@@ -2,35 +2,19 @@ const Web3 = require('web3');
 const EthereumTx = require('ethereumjs-tx').Transaction;
 
 async function sendRawTransaction() {
-    const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY');
-
-    // Replace with your values
-    const myAddress = 'YOUR_ADDRESS';
-    const privateKey = Buffer.from('YOUR_PRIVATE_KEY', 'hex');
-    const toAddress = 'RECIPIENT_ADDRESS';
-    const amountInWei = web3.utils.toWei('0.1', 'ether');
-
-    // Fetch nonce
-    const nonce = await web3.eth.getTransactionCount(myAddress, 'pending');
-
     const rawTransaction = {
-        nonce: web3.utils.toHex(nonce),
-        gasLimit: web3.utils.toHex(21000), // Standard gas limit for ether transfer
-        gasPrice: web3.utils.toHex(web3.utils.toWei('20', 'gwei')), // 20 gwei
-        to: toAddress,
-        value: web3.utils.toHex(amountInWei),
-        data: '0x', // No contract data
-    };
+        nonce: "0x00",
+        gasPrice: "0x09184e72a000",
+        gasLimit: "0x27100",
+        value: "0x00",
+        data: "0x60003681823780368234f58015156014578182fd5b80825250506014600cf3",
+        v: "0x1b",
+        r: "0x0000000001000000000000000000000001000000000000000000000000100000",
+        s: "0x1212121212121212121212121212121212121212121212121212121212121212",
+      }
 
-    // Sign transaction
-    const tx = new EthereumTx(rawTransaction, { 'chain': 'mainnet' });
-    tx.sign(privateKey);
-
-    const serializedTransaction = tx.serialize();
-
-    // Broadcast transaction
-    const txHash = await web3.eth.sendSignedTransaction('0x' + serializedTransaction.toString('hex'));
-    console.log(`Transaction hash: ${txHash.transactionHash}`);
+    //   bytes32 prefixedHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _message));
+    //   return ecrecover(prefixedHash, _v, _r, _s);
 }
 
 sendRawTransaction().catch(console.error);
