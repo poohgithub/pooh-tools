@@ -1,17 +1,18 @@
 import { NonceManager, Wallet } from "ethers";
 import "@nomiclabs/hardhat-ethers";
 import { ethers } from "hardhat";
-import { deposit_contract } from "../typechain";
+import { DepositContract } from "../typechain-types";
 
 async function main() {
-  const DepositContractFactory = await ethers.getContractFactory("deposit_contract");
-  const depositContract = await DepositContractFactory.attach(process.env.DEPOSIT_CONTRACT ?? "") as deposit_contract;
+  const DepositContractFactory = await ethers.getContractFactory("DepositContract");
+  const depositContract = await DepositContractFactory.attach(process.env.DEPOSIT_CONTRACT ?? "") as DepositContract;
 
   const provider = ethers.provider;
   const depositor = new Wallet(process.env.ADMIN_KEY ?? "");
-  const depositSigner = new NonceManager(provider.getSigner(depositor.address));
+  const depositSigner = new NonceManager(await provider.getSigner(depositor.address));
 
-  depositContract.connect(depositSigner).deposit({ value: ethers.parseEther("32") });
+  const result = await depositContract.connect(depositSigner).get_deposit_root();
+  console.log(result.toString());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
