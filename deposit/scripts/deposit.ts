@@ -12,7 +12,9 @@ async function main() {
   const depositSigner = new NonceManager(await provider.getSigner(depositor.address));
 
   const result = await depositContract.connect(depositSigner).get_deposit_root();
-  console.log(result.toString());
+  console.log("Deposit Root:", result.toString());
+  const result2 = await depositContract.connect(depositSigner).get_deposit_count();
+  console.log("Deposit Count:", result2.toString());
 }
 
 // We recommend this pattern to be able to use async/await everywhere
