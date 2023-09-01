@@ -1,10 +1,19 @@
 import * as dotenv from "dotenv";
-import { Wallet, parseEther } from "ethers";
-import { HardhatUserConfig, task } from "hardhat/config";
-import type { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
-import "@nomicfoundation/hardhat-toolbox";
+import { Wallet, parseEther, JsonRpcProvider } from "ethers";
+import { task } from "hardhat/config";
 
-dotenv.config({ path: ".env" });
+import type { HardhatUserConfig } from "hardhat/config";
+import type { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
+
+import "dotenv/config";
+import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
+import "@typechain/hardhat";
+import "hardhat-gas-reporter";
+import "solidity-coverage";
+
+dotenv.config({ path: "env/.env" });
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -62,6 +71,15 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       accounts: getAccounts(),
+    },
+    devnet: {
+      url: process.env.DEVNET_URL ?? "",
+      chainId: 12301,
+      accounts: [
+        process.env.ADMIN_KEY ?? "",
+        process.env.USER_KEY ?? "",
+        process.env.OWNER_KEY ?? "",
+      ],
     },
     testnet: {
       url: process.env.TESTNET_URL ?? "",

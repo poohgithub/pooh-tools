@@ -4,7 +4,9 @@ import { DepositContract } from "../typechain-types";
 
 async function main() {
   const provider = ethers.provider;
-  const amount = await provider.getBalance(process.env.DEPOSIT_CONTRACT ?? "");
+
+  const amount = await provider.getBalance(process.env.ADMIN_KEY ?? "");
+  // const amount = await provider.getBalance(process.env.DEPOSIT_CONTRACT ?? "");
   console.log("POOH: ", amount.toString());
 }
 
