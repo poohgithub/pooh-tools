@@ -13,6 +13,8 @@ const config: HardhatUserConfig = {
       chainId: 12301,
       accounts: [
         process.env.ADMIN_KEY ?? "",
+        process.env.USER_KEY ?? "",
+        process.env.OWNER_KEY ?? "",
       ],
     },
   },
