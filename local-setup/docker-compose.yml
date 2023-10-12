@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   geth:
-    image: "linked0/geth:latest"
+    image: "matterlabs/geth:latest"
     logging:
         driver: none 
     ports:

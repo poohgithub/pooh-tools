@@ -7,7 +7,6 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-verify": "^1.1.1",
     "@nomiclabs/hardhat-etherscan": "^3.1.7",
-    "@poohnet/hardhat-zksync-deploy": "^0.6.11",
     "@poohnet/hardhat-zksync-solc": "^0.4.5",
     "@poohnet/hardhat-zksync-verify": "^0.2.4",
     "@types/chai": "^4.3.4",
@@ -32,5 +31,8 @@
     "deposit-test": "NODE_ENV=test yarn hardhat deploy-zksync --script deposit-weth.ts",
     "deposit-diamond": "yarn hardhat deploy-zksync --script deposit-diamond.ts",
     "deposit": "yarn hardhat deploy-zksync --script deposit-weth.ts"
+  },
+  "dependencies": {
+    "@poohnet/hardhat-zksync-deploy": "/Users/hyunjaelee/work/hardhat-zksync/packages/hardhat-zksync-deploy"
   }
 }
