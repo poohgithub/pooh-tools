@@ -6,7 +6,30 @@ import "@nomiclabs/hardhat-waffle"
 dotenv.config({ path: ".env" });
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.19",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.19",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 18000,
+          },
+        },
+      },
+    ],
+    overrides: {
+      "contracts/WETH.sol": {
+        version: "0.6.6",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000000,
+          },
+        },
+      },
+    },
+  },
   networks: {
     devnet: {
       url: "http://13.209.149.243:8545",
