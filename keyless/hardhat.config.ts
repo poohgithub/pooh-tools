@@ -31,8 +31,8 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    devnet: {
-      url: "http://13.209.149.243:8545",
+    localnet: {
+      url: "http://localhost:8545",
       chainId: 12301,
       accounts: [
         process.env.ADMIN_KEY ?? "",
