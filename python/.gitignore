@@ -28,3 +28,4 @@ __pycache_
 .idea/
 
 .venv
+myvenv
